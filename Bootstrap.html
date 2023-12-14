@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce</title>
+ <!-- Bootstrap 5 CSS -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+ 
+<script src="./Bootstrap.js"></script>
+    <!-- Custom CSS -->
+    <style>
+        .dashboard {
+            display: none; /* Hide all dashboards initially */
+        }
+
+        .active-dashboard {
+            display: block; /* Show the active dashboard */
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Dashboard -->
+<div id="loginDashboard" class="container mt-5 dashboard active-dashboard">
+  <label><h3>Login</h3></label>
+  <div class="form-floating mb-3">
+      <input type="email" class="form-control" id="txtLoginEmail" placeholder="name@example.com">
+      <label for="txtLoginEmail">Email address</label>
+  </div>
+  <div class="form-floating">
+      <input type="password" class="form-control" id="txtLoginPassword" placeholder="Password">
+      <label for="txtLoginPassword">Password</label>
+  </div>
+  <button type="button" id="btnLogin" class="btn btn-primary mt-2">Login</button>
+  <a type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</a>
+  <a href="#" class="text-decoration-underline">Forgot password?</a>
+
+  <!-- Register Screen -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Create account</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="txtregisterEmail" placeholder="name@example.com">
+                      <label for="txtregisterEmail">Email Address</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="txtregisterName" placeholder="name">
+                      <label for="txtregisterName">Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                      <input type="password" class="form-control" id="txtregisterPassword" placeholder="Password">
+                      <label for="txtregisterPassword">Password</label>
+                  </div>
+                  <div class="form-floating">
+                      <input type="password" class="form-control" id="txtregisterConfirmPassword" placeholder="Password">
+                      <label for="txtregisterConfirmPassword">Confirm Password</label>
+                  </div>
+                  <div class="container mt-3">
+                      <div class="mt-2 row">
+                          <div class="form-check col-4">
+                              <input class="form-check-input" type="radio" name="radioGender" id="txtregisterMale" checked>
+                              <label class="form-check-label" for="txtregisterMale">Male</label>
+                          </div>
+                          <div class="form-check col-4">
+                              <input class="form-check-input" type="radio" name="radioGender" id="txtregisterFemale">
+                              <label class="form-check-label" for="txtregisterFemale">Female</label>
+                          </div>
+                          <div class="form-check col-4">
+                              <input class="form-check-input" type="radio" name="radioGender" id="txtregisterRatherNot">
+                              <label class="form-check-label" for="txtregisterRatherNot">Rather not say</label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="mt-3">
+                      <div class="form-floating">
+                          <select id="regYear" class="form-select" aria-label="Default select example">
+                              <option selected>Select Age</option>
+                              <option value="1">13yr - 19yr</option>
+                              <option value="2">20yr - 29yr</option>
+                              <option value="3">30yr - 39yr</option>
+                              <option value="4">40yr - 49yr</option>
+                              <option value="5">50yr - 59yr</option>
+                              <option value="6">60yr - 69yr</option>
+                              <option value="7">70yr - 79yr</option>
+                          </select>
+                          <label for="regYear">Age</label>
+                      </div>
+                  </div>
+                  <div class="mt-3">
+                      <div class="input-group">
+                          <span class="input-group-text">Address</span>
+                          <textarea class="form-control" id="txtRegisterAddress" aria-label="With textarea"></textarea>
+                      </div>
+                  </div>
+                  <div class="mt-3">
+                      <div class="form-floating mb-3">
+                          <input type="date" class="form-control" id="txtRegisterBirthdate" placeholder="Birthdate">
+                          <label for="txtRegisterBirthdate">Birthdate</label>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                  <button type="button" id="btnRegister" class="btn btn-success">Register</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- End of Register -->
+</div>
+
+    <!-- Welcome Dashboard -->
+    <div id="welcomeDashboard" class="container-fluid dashboard">
+
+      <!-- Navigation Bar -->
+<div class="">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e8e4c9;">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#"><h2 class="text-success">E-Commerce</h2></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                      <a class="btn btn-light me-1" aria-current="page" href="#">Categories</a>
+                  </li>
+                  <!-- Add Product -->
+                  <li>
+                      <button type="button" class="btn btn-light mr-3" data-bs-toggle="modal" data-bs-target="#productModal">
+                          Add Product
+                      </button>
+                      <div class="modal" id="productModal">
+                          <div class="modal-dialog">
+                              <div class="modal-content">
+
+                                  <div class="modal-header">
+                                      <h3 class="modal-title">Add Product</h3>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+
+                                  <div class="modal-body">
+
+                                      <form>
+                                          <div class="mb-3">
+                                              <label for="productName" class="form-label">Product Name</label>
+                                              <input type="text" class="form-control" id="productName" placeholder="Product Name">
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="Description" class="form-label">Description</label>
+                                              <input type="text" class="form-control" id="Description" placeholder="Description">
+                                          </div>
+                                          <div class="input-group mb-3">
+                                              <span class="input-group-text">$</span>
+                                              <input type="text" class="form-control" id="Price" placeholder="Price" aria-label="Amount (to the nearest dollar)">
+                                              <span class="input-group-text">.00</span>
+                                          </div>
+                                          <div class="mb-3">
+                                              <label class="form-label" id="ProductImageLabel" for="CustomFile">Product Image</label>
+                                              <input type="file" class="form-control" id="CustomFile" accept="image/*" />
+                                          </div>
+                                      </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-success" id="AddProductbtn" data-bs-dismiss="modal">Add Product</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <!-- End of Add product -->
+
+                  <!-- DROPDOWN -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mr-3" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Settings
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Privacy Settings</a>
+                        <a class="dropdown-item" href="#">Help & Support</a>
+                        <a class="dropdown-item" href="#" id="btnDeleteuser">Delete account</a>
+                    </div>
+                </li>
+                  <li class="nav-item">
+                      <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                      </form>
+                  </li>
+                  </ul>
+                  <form class="d-flex" role="search">
+
+            <!-- PROFILE -->
+            <button type="button" id="btnProfile" class="btn btn-primary position-relative me-3" data-bs-toggle="modal" data-bs-target="#profileModal">
+                Profile
+                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                </span>
+            </button>
+
+            <!-- Profile Modal -->
+              <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="profileModalLabel" style="color: #4CAF50; font-family: 'Arial', sans-serif; font-size: 24px; font-weight: bold; text-align: center;">
+                                🌟 User Profile 🌟
+                            </h5>
+                            <button type="button" class="btn btn-danger btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <!-- Display user name and email -->
+                            <p class="mb-2"><strong class="text-success display-4"><span id="profileName" class="text-dark fw-bold"></span></strong></p>
+                            <p class="mb-2"><strong class="text-primary">Email:</strong> <span id="profileEmail" class="text-dark fw-bold"></span></p>
+                            <p class="mb-2"><strong class="text-warning-emphasis">Address:</strong> <span id="profileaddress" class="text-dark fw-bold"></span></p>
+                            <p class="mb-2"><strong class="text-primary">Birthdate:</strong> <span id="profilebirthdate" class="text-dark fw-bold"></span></p>
+
+                            <!-- Update Profile Section -->
+                            <div class="update-profile-section mt-4"> <!-- Add margin-top class -->
+                                <h2 class="mb-3">Update Profile</h2>
+                                <label for="txtUpdateName">Name:</label>
+                                <input type="text" id="txtUpdateName" placeholder="Enter your name" class="form-control mb-3">
+                                <label for="txtUpdateAddress">Address:</label>
+                                <input type="text" id="txtUpdateAddress" placeholder="Enter your address" class="form-control mb-3">
+                                <label for="txtUpdateBirthdate">Birthdate:</label>
+                                <input type="date" id="txtUpdateBirthdate" class="form-control mb-3">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-success btn-block" id="btnUpdateProfile" type="button"><b>Update Profile</b></button>
+                            <button class="btn btn-outline-danger btn-block" id="btnLogout" data-bs-dismiss="modal" type="button"><b>Logout</b></button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <!-- END OF PROFILE -->
+
+            <!-- CART -->
+            <button type="button" id="btnCart" class="btn btn-warning position-relative me-3" data-bs-toggle="modal" data-bs-target="#cartModal">
+              Cart
+              <span id="itemCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  <span class="visually-hidden">Item count</span>
+              </span>
+            </button>
+
+            <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="cartModalLabel">
+                              <span class="text-warning">🛒 Shopping Cart</span>
+                          </h5>
+                      </div>
+                      <div class="modal-body">
+                          <div id="cartContainer"></div>
+                          <hr>
+                          <p class="text-end"><b>Total Amount: $<span id="totalAmount" class="text-success">0.00</span></b></p>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                          <button type="button" class="btn btn-success">Checkout</button>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+</div>
+            <!-- End of Navigation Bar -->
+
+            <!-- Product Container -->
+            <div class="container mt-5">
+              <div class="row" id="productContainer">
+                  <!-- Product cards will be dynamically added here -->
+              </div>
+            </div>
+            <!-- Add Product Modal -->
+            <div class="modal fade" id="updateProductModal" tabindex="-1" aria-labelledby="updateProductModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="updateProductModalLabel">Update Product</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                          <!-- Input fields for updating product -->
+                          <label for="updateProductName">Product Name:</label>
+                          <input type="text" class="form-control" id="updateProductName" required>
+          
+                          <label for="updateDescription">Description:</label>
+                          <textarea class="form-control" id="updateDescription" rows="3" required></textarea>
+          
+                          <label for="updatePrice">Price:</label>
+                          <input type="number" class="form-control" id="updatePrice" required>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" id="updateProductBtn">Update Product</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>
