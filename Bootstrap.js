@@ -1,4 +1,4 @@
-                document.addEventListener("DOMContentLoaded", function () {
+                  document.addEventListener("DOMContentLoaded", function () {
                     let btnRegister = document.querySelector("#btnRegister");
                     let btnLogin = document.querySelector("#btnLogin");
                     let btnDeleteuser = document.querySelector("#btnDeleteuser");
@@ -9,6 +9,9 @@
                     let AddProductbtn = document.querySelector("#AddProductbtn");
                     let cartContainer = document.querySelector("#cartContainer");
                     let btnUpdateProfile = document.querySelector("#btnUpdateProfile");
+                    let btnCheckout = document.querySelector("#btnCheckout");
+                    let btnSoldItems = document.querySelector("#btnSoldItems");
+
 
 //START OF REGISTER BUTTON                    
                     btnRegister.onclick = () => {
@@ -234,7 +237,7 @@
                                 <p class="text-success">$${product.price} USD</p>
                                 <button class="btn btn-outline-success add-to-cart" data-index="${i}">Add to Cart</button>
                                 <button class="btn btn-outline-info show-info-product" data-bs-toggle="modal" data-bs-target="#infoProductModal" data-index="${i}">Info</button>
-                                <button class="btn btn-info update-product" data-bs-toggle="modal" data-bs-target="#updateProductModal" data-index="${i}">Edit</button>
+                                <button class="btn btn-outline-info update-product" data-bs-toggle="modal" data-bs-target="#updateProductModal" data-index="${i}">Edit</button>
                                 <button class="btn btn-outline-danger delete-product" data-index="${i}">Delete Product</button>
                             </div>
                         `;
@@ -451,114 +454,97 @@
                     document.getElementById("updateProductBtn").setAttribute("data-index", index);
                 }
 
-                // Add a click event listener for the Close button
-                document.querySelector(".close-product-modal").addEventListener("click", function () {
-                    // Check if required fields are not empty
-                    let updatedName = document.getElementById("updateProductName").value;
-                    let updatedDescription = document.getElementById("updateDescription").value;
-                    let updatedPrice = document.getElementById("updatePrice").value;
-
-                    if (updatedName.trim() !== '' || updatedDescription.trim() !== '' || updatedPrice.trim() !== '') {
-                        // Show an alert if required fields are not empty
-                        alert("Are you sure you want to close without saving?");
-                    } else {
-                        // Dismiss the modal
-                        let updateProductModal = new bootstrap.Modal(document.getElementById('updateProductModal'));
-                        updateProductModal.hide();
-                    }
-                }); 
 //THIS IS THE END OF THE UPDATE PRODUCT MODAL
 
 
-                document.addEventListener("click", function (event) {
-                    if (event.target.classList.contains("show-info-product")) {
-                        let index = event.target.getAttribute("data-index");
-                        showProductInfoModal(index);
-                    }
-                });
 
 //PRODUCT INFO FUNCTION
-                function showProductInfoModal(index) {
-                    let product = products[index];
 
-                    // Set values in the modal body
-                    document.getElementById("infoProductName").innerHTML = `<strong>${product.productName}</strong>`;
-                    document.getElementById("infoProductDescription").innerHTML = `<p>${product.description}</p>`;
-                    document.getElementById("infoProductPrice").innerHTML = `<p class="text-success">$${product.price} USD</p>`;
-
-                    // Show the modal
-                    let infoProductModal = new bootstrap.Modal(document.getElementById('infoProductModal'));
-                    infoProductModal.show();
-                }
+document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("show-info-product")) {
+        let index = event.target.getAttribute("data-index");
+        showProductInfoModal(index);
+    }
+});
+function showProductInfoModal(index) {
+    let product = products[index];
+    
+    document.getElementById("infoProductName").innerHTML = `<strong>${product.productName}</strong>`;
+    document.getElementById("infoProductDescription").innerHTML = `<p>${product.description}</p>`;
+    document.getElementById("infoProductPrice").innerHTML = `<p class="text-success">$${product.price} USD</p>`;
+    
+    let infoProductModal = new bootstrap.Modal(document.getElementById('infoProductModal'));
+    infoProductModal.show();
+    }
 
 //VIEW SOLD ITEMS START
-                let btnCheckout = document.querySelector("#btnCheckout");
-                let btnSoldItems = document.querySelector("#btnSoldItems");
+               
+btnCheckout.onclick = function () {
+    // Move items from cart to sold items list
+    soldItems.push(...cart);
+    // Clear the cart
+    cart = [];
+    // Save the updated cart and sold items to local storage
+    storeCart(cart);
+    storeSoldItems(soldItems);
+    // Update the cart display
+    showCart();
+    // Show the sold items in the modal
+    showSoldItems();
+};
 
-                btnCheckout.onclick = function () {
-                    // Move items from cart to sold items list
-                    soldItems.push(...cart);
-                    // Clear the cart
-                    cart = [];
-                    // Save the updated cart and sold items to local storage
-                    storeCart(cart);
-                    storeSoldItems(soldItems);
-                    // Update the cart display
-                    showCart();
-                };
+btnSoldItems.onclick = function () {
+    // Show the modal with sold items
+    showSoldItems();
+};
 
-                btnSoldItems.onclick = function () {
-                    // Show the modal with sold items
-                    showSoldItems();
-                };
+// Function to show the sold items
+function showSoldItems() {
+    // Get the sold items container element
+    let soldItemsContainer = document.getElementById("soldItemsContainer");
+    // Clear existing sold items
+    soldItemsContainer.innerHTML = "";
 
-                function showSoldItems() {
-                    // Get the sold items container element
-                    let soldItemsContainer = document.getElementById("soldItemsContainer");
-                    // Clear existing sold items
-                    soldItemsContainer.innerHTML = "";
+    // Loop through each sold item and create HTML elements
+    for (let i = 0; i < soldItems.length; i++) {
+        let soldItem = soldItems[i];
 
-                    // Loop through each sold item and create HTML elements
-                    for (let i = 0; i < soldItems.length; i++) {
-                        let soldItem = soldItems[i];
+        // Create a sold item card (similar to the product card)
+        // You can customize this based on how you want to display sold items
+        let soldItemCard = document.createElement("div");
+        soldItemCard.className = "col-md-4 card";
 
-                        // Create a sold item card (similar to the product card)
-                        // You can customize this based on how you want to display sold items
-                        let soldItemCard = document.createElement("div");
-                        soldItemCard.className = "col-md-4 card";
+        soldItemCard.innerHTML = `
+            <img src="${soldItem.productImage}" class="card-img-top" alt="${soldItem.productName}" height="220">
+            <div class="card-body">
+                <p><h5 class="card-title">${soldItem.productName}</h5></p>
+                <p class="text-success">$${soldItem.price} USD</p>
+                <p>Quantity: ${soldItem.quantity}</p>
+            </div>
+        `;
 
-                        soldItemCard.innerHTML = `
-                            <img src="${soldItem.productImage}" class="card-img-top" alt="${soldItem.productName}" height="220">
-                            <div class="card-body">
-                                <p><h5 class="card-title">${soldItem.productName}</h5></p>
-                                <p class="text-success">$${soldItem.price} USD</p>
-                                <p>Quantity: ${soldItem.quantity}</p>
-                            </div>
-                        `;
+        // Append the sold item card to the sold items container
+        soldItemsContainer.appendChild(soldItemCard);
+    }
 
-                        // Append the sold item card to the sold items container
-                        soldItemsContainer.appendChild(soldItemCard);
-                    }
+    // Show the modal
+    let soldItemsModal = new bootstrap.Modal(document.getElementById('soldItemsModal'));
+    soldItemsModal.show();
+}
 
-                    // Show the modal
-                    let soldItemsModal = new bootstrap.Modal(document.getElementById('soldItemsModal'));
-                    soldItemsModal.show();
-                }
+// Function to store sold items in local storage
+function storeSoldItems(soldItems) {
+    localStorage.setItem("soldItems", JSON.stringify(soldItems));
+}
 
-                // Function to store sold items in local storage
-                function storeSoldItems(soldItems) {
-                    localStorage.setItem("soldItems", JSON.stringify(soldItems));
-                }
+// Function to get sold items from local storage
+function getStoredSoldItems() {
+    let storedSoldItems = localStorage.getItem("soldItems");
+    return storedSoldItems ? JSON.parse(storedSoldItems) : [];
+}
 
-
-                // Function to get sold items from local storage
-                function getStoredSoldItems() {
-                    let storedSoldItems = localStorage.getItem("soldItems");
-                    return storedSoldItems ? JSON.parse(storedSoldItems) : [];
-                }
-
-                // Initialize the sold items array
-                let soldItems = getStoredSoldItems();
+// Initialize the sold items array
+let soldItems = getStoredSoldItems();
 
 
                 });
