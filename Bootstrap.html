@@ -286,32 +286,42 @@
                   <!-- Product cards will be dynamically added here -->
               </div>
             </div>
-            <!-- Add Product Modal -->
+            <!-- update Product Modal -->
             <div class="modal fade" id="updateProductModal" tabindex="-1" aria-labelledby="updateProductModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title" id="updateProductModalLabel">Update Product</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                          <!-- Input fields for updating product -->
-                          <label for="updateProductName">Product Name:</label>
-                          <input type="text" class="form-control" id="updateProductName" required>
-          
-                          <label for="updateDescription">Description:</label>
-                          <textarea class="form-control" id="updateDescription" rows="3" required></textarea>
-          
-                          <label for="updatePrice">Price:</label>
-                          <input type="number" class="form-control" id="updatePrice" required>
-                      </div>
-                      <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" id="updateProductBtn">Update Product</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateProductModalLabel">Update Product</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Input fields for updating product -->
+                            <form>
+                                <div class="mb-3">
+                                    <label for="updateProductName" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" id="updateProductName" placeholder="Update Product Name"> 
+                                </div>
+                                <div class="mb-3">
+                                    <label for="updateDescription" class="form-label">Description</label>
+                                    <input type="text" class="form-control" id="updateDescription" placeholder="Update Description">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">$</span>
+                                    <input type="text" class="form-control" id="updatePrice" placeholder="Update Price" aria-label="Amount (to the nearest dollar)">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+
+                                <input type="hidden" id="updateProductIndex" />
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" class="close-product-modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="updateProductBtn">Update Product</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
           <!-- Info Product Modal -->
             <div class="modal fade" id="infoProductModal" tabindex="-1" aria-labelledby="infoProductModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
